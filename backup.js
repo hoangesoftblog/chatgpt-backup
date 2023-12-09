@@ -59,7 +59,7 @@ function downloadJson(data) {
 }
 
 async function loadToken() {
-  const res = await fetch('https://chat.openai.com/api/auth/session');
+  const res = await fetch('/api/auth/session');
 
   if (!res.ok) {
     throw new Error('failed to fetch token');
@@ -71,7 +71,7 @@ async function loadToken() {
 
 async function getConversationIds(token, offset = 0) {
   const res = await fetch(
-    `https://chat.openai.com/backend-api/conversations?offset=${offset}&limit=20`,
+    `/backend-api/conversations?offset=${offset}&limit=20`,
     {
       headers: {
         authorization: `Bearer ${token}`,
@@ -95,7 +95,7 @@ async function fetchConversation(token, id, maxAttempts = 3, attempt = 1) {
   const BACKOFF_MULTIPLIER = 2;
   try {
     const res = await fetch(
-      `https://chat.openai.com/backend-api/conversation/${id}`,
+      `/backend-api/conversation/${id}`,
       {
         headers: {
           authorization: `Bearer ${token}`,
