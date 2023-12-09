@@ -15,35 +15,7 @@ function sleep(ms = 1000) {
 }
 
 function parseConversation(rawConversation) {
-  const title = rawConversation.title;
-  const create_time = rawConversation.create_time;
-  const mapping = rawConversation.mapping;
-  const keys = Object.keys(mapping);
-  const messages = [];
-
-  for (const k of keys) {
-    const msgPayload = mapping[k];
-    const msg = msgPayload.message;
-    if (!msg) continue;
-
-    const role = msg.author.role;
-    const content = msg.content.parts;
-    const model = msg.metadata.model_slug;
-    const create_time = msg.create_time;
-
-    messages.push({
-      role,
-      content,
-      model,
-      create_time,
-    });
-  }
-
-  return {
-    messages,
-    create_time,
-    title,
-  };
+  return rawConversation;
 }
 
 function getRequestCount(total, startOffset, stopOffset) {
